@@ -18,7 +18,8 @@ public class WebSocketClient implements WebSocket.Listener {
     public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
         System.out.println(data);
         webSocket.request(1);
-        return new CompletableFuture().completeAsync(()-> "onText() completed.").thenAccept(System.out::println);    }
+        return new CompletableFuture().completeAsync(() -> "onText() completed.").thenAccept(System.out::println);
+    }
 
     @Override
     public CompletionStage<?> onBinary(WebSocket webSocket, ByteBuffer data, boolean last) {
@@ -30,14 +31,15 @@ public class WebSocketClient implements WebSocket.Listener {
         webSocket.request(1);
         System.out.println("Ping: Client ---> Server");
         System.out.println(message.asCharBuffer().toString());
-        return new CompletableFuture().completeAsync(()->"Ping completed.").thenAccept(System.out::println);    }
+        return new CompletableFuture().completeAsync(() -> "Ping completed.").thenAccept(System.out::println);
+    }
 
     @Override
     public CompletionStage<?> onPong(WebSocket webSocket, ByteBuffer message) {
         webSocket.request(1);
         System.out.println("Pong: Client ---> Server");
         System.out.println(message.asCharBuffer().toString());
-        return new CompletableFuture().completeAsync(()->"Pong completed.").thenAccept(System.out::println);
+        return new CompletableFuture().completeAsync(() -> "Pong completed.").thenAccept(System.out::println);
     }
 
     @Override

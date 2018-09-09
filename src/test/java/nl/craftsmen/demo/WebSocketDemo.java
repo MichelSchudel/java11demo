@@ -1,33 +1,27 @@
 package nl.craftsmen.demo;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.WebSocket;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.concurrent.CompletableFuture;
 
 import static java.net.http.WebSocket.NORMAL_CLOSURE;
 
 public class WebSocketDemo {
 
-    public static void main(String[] args) {
-        try {
-            var server = new WebSocketServer().getWebSocket();
+    public static void main(String[] args) throws Exception {
+            WebSocketClient client = new WebSocketClient();
+            CompletableFuture<WebSocket> server_cf = HttpClient.newHttpClient().newWebSocketBuilder().buildAsync(URI.create("ws://localhost:4567/echo"), client);
+            WebSocket server = server_cf.join();
+
             server.sendPing(ByteBuffer.wrap("Ping: Client <--- Server".getBytes(Charset.forName("UTF-16"))));
             server.sendPing(ByteBuffer.wrap("Pong: Client <--- Server".getBytes(Charset.forName("UTF-16"))));
-            server.sendText("Hello!", false);
+            server.sendText("Hello!", true);
             server.sendClose(NORMAL_CLOSURE, "Goodbye!");
-        } catch (Exception e) {
-            System.out.println("Failure:" + e.getClass().toString().replace("class", "") + " was thrown.\nMessage: " + e.getMessage());
-
-            if (e.getMessage().contains("WebSocketHandshakeException")) {
-                var ex = ((java.net.http.WebSocketHandshakeException) e.getCause()).getResponse();
-                System.out.println("Body:\t" + ex.body());
-                System.out.println("Headers:");
-                ex.headers().map().forEach((k, v) -> System.out.println("\t" + k + ":  " + v));
-                System.out.println("HTTP request:  " + ex.request());
-                System.out.println("HTTP version:  " + ex.version());
-                System.out.println("Previous Reponse?:  " + ex.previousResponse());
-            }
-        }
+            Thread.sleep(5000);
     }
 
-    ;
-};
+
+}

@@ -18,6 +18,31 @@ public class HttpClientDemo {
 
     private HttpClient client;
 
+    @Test
+    public void testJava8() throws Exception {
+        URL url = new URL("http://localhost:4567/hello");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("myHeader", "headerValue");
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending 'GET' request to URL");
+        System.out.println("Response Code : " + responseCode);
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+        //print result
+        System.out.println(response.toString());
+
+    }
+
     @Before
     public void setup() {
         client = HttpClient.newBuilder()
@@ -53,28 +78,4 @@ public class HttpClientDemo {
     }
 
 
-    @Test
-    public void testJava8() throws Exception {
-        URL url = new URL("http://localhost:4567/hello");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("myHeader", "headerValue");
-        int responseCode = con.getResponseCode();
-        System.out.println("Sending 'GET' request to URL");
-        System.out.println("Response Code : " + responseCode);
-
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-
-        //print result
-        System.out.println(response.toString());
-
-    }
 }
