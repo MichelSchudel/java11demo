@@ -2,11 +2,13 @@ package nl.craftsmen.demo;
 
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.*;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,9 +41,7 @@ public class ApiDemo {
         String laughter = "ha";
         System.out.println(new String(new char[10]).replace("\0", laughter));
         //java 11 methods
-        String moreLaughter = laughter.repeat(10);
-        System.out.println(moreLaughter);
-        assertThat(moreLaughter).isEqualTo("hahahahahahahahahaha");
+        System.out.println(laughter.repeat(10));
     }
     @Test
     public void testLines() {
@@ -73,6 +73,32 @@ public class ApiDemo {
         sbWithSameContent.append("hi!");
         System.out.println(sb.compareTo(sbWithSameContent));
     }
+
+    @Test
+    public void bufferedOutputStream() {
+        String s = "Hello, world!";
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byteArrayOutputStream.writeBytes(s.getBytes());
+    }
+
+
+    @Test
+    public void optionalDemo() {
+        Optional<String> optional = getStringValue();
+        //java 10
+        if (!optional.isPresent()) {
+            System.out.println("empty!");
+        }
+        //java 11
+        if (optional.isEmpty()) {
+            System.out.println("empty!");
+        }
+    }
+
+    private Optional<String> getStringValue() {
+        return Optional.empty();
+    }
+
     private void printQuoted(Object s) {
         System.out.println("s = [" + s + "]");
     }
