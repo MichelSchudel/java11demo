@@ -2,12 +2,16 @@ package nl.craftsmen.demo;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.*;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StringDemo {
+public class ApiDemo {
 
 
     @Test
@@ -47,6 +51,28 @@ public class StringDemo {
         someText.lines().forEach(System.out::println);
     }
 
+    @Test
+    public void testPathOf() throws IOException, URISyntaxException {
+        URI uri = getClass().getResource("/file.txt").toURI();
+        //java 10
+        Files.readAllLines(Paths.get(uri)).forEach(System.out::println);
+        //java 11
+        Files.readAllLines(Path.of(uri)).forEach(System.out::println);
+        //even simpler:
+        System.out.println(Files.readString(Path.of(uri)));
+        //there is also a write option
+        Files.writeString(Path.of("newfile.txt"), "content", StandardOpenOption.CREATE);
+
+    }
+
+    @Test
+    public void testCompareStringBuffer() {
+        StringBuffer sb = new StringBuffer();
+        StringBuffer sbWithSameContent = new StringBuffer();
+        sb.append("hi!");
+        sbWithSameContent.append("hi!");
+        System.out.println(sb.compareTo(sbWithSameContent));
+    }
     private void printQuoted(Object s) {
         System.out.println("s = [" + s + "]");
     }
