@@ -13,7 +13,11 @@ public class WebSocketDemo {
 
     public static void main(String[] args) throws Exception {
             WebSocketClient client = new WebSocketClient();
-            CompletableFuture<WebSocket> server_cf = HttpClient.newHttpClient().newWebSocketBuilder().buildAsync(URI.create("ws://localhost:4567/echo"), client);
+            CompletableFuture<WebSocket> server_cf = HttpClient.
+                    newHttpClient().
+                    newWebSocketBuilder().
+                    buildAsync(URI.create("ws://localhost:4567/echo"),
+                            client);
             WebSocket server = server_cf.join();
 
             server.sendPing(ByteBuffer.wrap("Ping: Client <--- Server".getBytes(Charset.forName("UTF-16"))));

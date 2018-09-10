@@ -54,12 +54,16 @@ public class ApiDemo {
     @Test
     public void testPathOf() throws IOException, URISyntaxException {
         URI uri = getClass().getResource("/file.txt").toURI();
+
         //java 10
         Files.readAllLines(Paths.get(uri)).forEach(System.out::println);
+
         //java 11
         Files.readAllLines(Path.of(uri)).forEach(System.out::println);
+
         //even simpler:
         System.out.println(Files.readString(Path.of(uri)));
+
         //there is also a write option
         Files.writeString(Path.of("newfile.txt"), "content", StandardOpenOption.CREATE);
 
@@ -79,6 +83,7 @@ public class ApiDemo {
         String s = "Hello, world!";
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byteArrayOutputStream.writeBytes(s.getBytes());
+        System.out.println(new String(byteArrayOutputStream.toByteArray()));
     }
 
 
