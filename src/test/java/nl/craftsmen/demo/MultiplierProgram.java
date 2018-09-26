@@ -1,5 +1,8 @@
 package nl.craftsmen.demo;
 
+/**
+ * Single source file that can be run with java nl.craftsmen.demo.MultiplierProgram 2
+ */
 public class MultiplierProgram {
 
     public static void main(String[] args) {

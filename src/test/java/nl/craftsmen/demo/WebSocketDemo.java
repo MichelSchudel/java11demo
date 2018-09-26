@@ -9,8 +9,10 @@ import java.util.concurrent.CompletableFuture;
 
 import static java.net.http.WebSocket.NORMAL_CLOSURE;
 
+/**
+ * For this demo, start the SparkWebSocketServer class first.
+ */
 public class WebSocketDemo {
-
     public static void main(String[] args) throws Exception {
             CompletableFuture<WebSocket> server_cf = HttpClient.
                     newHttpClient().

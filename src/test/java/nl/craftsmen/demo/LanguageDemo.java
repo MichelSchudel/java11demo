@@ -3,6 +3,10 @@ package nl.craftsmen.demo;
 import com.sun.istack.Nullable;
 import org.junit.Test;
 
+/**
+ * Demo showing local variable syntax for lamba parameters.
+ */
+
 public class LanguageDemo {
 
     @FunctionalInterface

@@ -13,6 +13,9 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Some nice API changes.
+ */
 public class ApiDemo {
 
 

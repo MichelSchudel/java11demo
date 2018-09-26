@@ -6,6 +6,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+/**
+ * JavaEE has been completely removed from jdk11, so you need to declare depdendencies the the JAXB runtime in your build system.
+ */
 public class JaxbDemo {
 
     @Test
