@@ -14,9 +14,10 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
+/**
+ * For this demo, start the SparkServer class first.
+ */
 public class HttpClientDemo {
-
-    private HttpClient client;
 
     @Test
     public void testJava8() throws Exception {
@@ -45,15 +46,16 @@ public class HttpClientDemo {
 
     @Before
     public void setup() {
-        client = HttpClient.newBuilder()
-                .version(HttpClient.Version.HTTP_1_1)
-                .followRedirects(HttpClient.Redirect.NORMAL)
-                .connectTimeout(Duration.ofSeconds(20))
-                .build();
+
     }
 
     @Test
     public void testHttpClient() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .connectTimeout(Duration.ofSeconds(20))
+                .build();
         HttpRequest httpRequest = HttpRequest
                 .newBuilder()
                 .header("myHeader", "myValue")
@@ -67,6 +69,11 @@ public class HttpClientDemo {
 
     @Test
     public void testASync() throws InterruptedException {
+        HttpClient client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .connectTimeout(Duration.ofSeconds(20))
+                .build();
         HttpRequest httpRequest = HttpRequest
                 .newBuilder()
                 .uri(URI.create("http://localhost:4567/hello"))

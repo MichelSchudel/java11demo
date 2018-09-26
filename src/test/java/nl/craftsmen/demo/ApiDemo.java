@@ -81,9 +81,14 @@ public class ApiDemo {
     @Test
     public void bufferedOutputStream() {
         String s = "Hello, world!";
+        //java 10
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        byteArrayOutputStream.writeBytes(s.getBytes());
+        byteArrayOutputStream.write(s.getBytes(), 0, s.length());
         System.out.println(new String(byteArrayOutputStream.toByteArray()));
+        //java 11
+        ByteArrayOutputStream byteArrayOutputStream2 = new ByteArrayOutputStream();
+        byteArrayOutputStream2.writeBytes(s.getBytes());
+        System.out.println(new String(byteArrayOutputStream2.toByteArray()));
     }
 
 

@@ -5,6 +5,10 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+/**
+ * For this demo, start the SparkWebSocketServer class first.
+ */
+
 public class WebSocketClient implements WebSocket.Listener {
 
     @Override

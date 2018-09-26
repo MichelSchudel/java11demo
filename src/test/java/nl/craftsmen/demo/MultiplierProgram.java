@@ -9,7 +9,6 @@ public class MultiplierProgram {
 
 
     static class Multiplier {
-
         int multiply(int x) {
             return x * x;
         }
